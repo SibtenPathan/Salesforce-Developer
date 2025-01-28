@@ -1,0 +1,44 @@
+<apex:page standardController="Contact">
+
+    <h1>Congratulations</h1>
+    This is your new Page
+
+    <apex:pageBlock title="PageBlockTitle">
+
+        <apex:pageBlockSection title="SectionTitle">
+            This is a page block component with a section!
+        </apex:pageBlockSection>
+
+        <apex:pageBlockSection title="UserDetails">
+            {! $User.FirstName}{! $User.LastName}
+        </apex:pageBlockSection>
+
+        <apex:pageBlockSection title="Formula">
+            10th power of 2 is {! 2^10}
+        </apex:pageBlockSection>
+
+        <apex:pageBlockSection title="contactSummary">
+            Name: {! Contact.Name}
+            <br/> Email: {! Contact.Email}
+            <br/> Phone: {! Contact.Phone}
+            <br/>
+        </apex:pageBlockSection>
+
+        <apex:pageBlockSection title="contactSummary">
+            <apex:outputField value="{! Contact.name}" />
+            <apex:outputField value="{! Contact.Email}" />
+            <apex:outputField value="{! Contact.Phone}" />
+        </apex:pageBlockSection>
+
+    </apex:pageBlock>
+    <apex:form>
+        <apex:pageBlock title="Edit Contact">
+            <apex:pageBlockSection columns="1">
+                <apex:inputField value="{! Contact.Name}" />
+                <apex:inputField value="{! Contact.email}" />
+                <apex:inputField value="{! Contact.phone}" />
+                <apex:commandButton action="{! save}" value="save" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
