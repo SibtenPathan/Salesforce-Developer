@@ -1,3 +1,46 @@
-<apex:page >
-
+<apex:page standardController="Contact" recordSetVar="Contacts">
+    <apex:pageBlock title="Viewing Contacts">
+        <!-- <p>{!recordCount}</p> -->
+        <apex:form id="theForm">
+            <apex:pageBlockSection columns="3">
+                
+                   <apex:pageBlockTable value="{!Contacts}" var="ct1">
+                    <apex:column value="{!ct1.name}" />
+                    <apex:column value="{!ct1.phone}" />
+                    <apex:column value="{!ct1.email}" />
+                   </apex:pageBlockTable>
+                
+            </apex:pageBlockSection>
+            <apex:panelGrid columns="4">
+                <apex:commandLink action="{!first}">FIRST</apex:commandLink>
+                <apex:commandLink action="{!previous}">PREVIOUS</apex:commandLink>
+                <apex:commandLink action="{!next}">NEXT</apex:commandLink>
+                <apex:commandLink action="{!last}">LAST</apex:commandLink>
+            </apex:panelGrid>
+        </apex:form>
+    </apex:pageBlock>
+    <script>
+        
+    </script>
 </apex:page>
+
+<!-- 
+<apex:page controller="PaginationController">
+    <h1>Contact List</h1>
+    
+    <apex:pageMessages />
+    
+    <apex:pageBlock title="Contacts" id="pageBlock">
+        <apex:pageBlockTable value="{!contacts}" var="ct">
+            <apex:column value="{!ct.Name}" headerValue="Contact Name"/>
+        </apex:pageBlockTable>
+        
+        <apex:facet name="footer">
+            <div class="pagination">
+                <span>Page {!currentPage} of {!totalPages()}</span>
+                <apex:commandButton value="Previous" action="{!previousPage}" reRender="pageBlock" disabled="{!IF(currentPage == 1, true, false)}"/>
+                <apex:commandButton value="Next" action="{!nextPage}" reRender="pageBlock" disabled="{!IF(currentPage == totalPages(), true, false)}"/>
+            </div>
+        </apex:facet>
+    </apex:pageBlock>
+</apex:page> -->
