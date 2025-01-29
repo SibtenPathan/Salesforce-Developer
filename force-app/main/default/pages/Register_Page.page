@@ -1,0 +1,34 @@
+<apex:page showHeader="false">
+        <apex:form id="registerform">
+            <apex:pageBlock id="pb" title="Register Form">
+            <apex:pageBlockSection id="pbc">
+                <apex:inputText id="name" label="Enter Name"/>
+                <apex:inputText id="email" label="Enter Email"/>
+                <apex:inputText id="password" label="Enter Password"/>
+                <apex:inputText id="phone" label="Enter Phone"/>
+                <apex:commandButton value="Submit" onclick="submitForm();"/><br/>
+                <apex:commandButton value="Already Registered?" onclick="redirectLogin();"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        </apex:form>
+
+        <script>
+            function submitForm(){
+                var regex='^[^@]+@[^@]+\.[^@]+$';
+                var name = document.getElementById('{!$Component.registerform.pb.pbc.name}').value;
+                var email = document.getElementById('{!$Component.registerform.pb.pbc.email}').value;
+                var password = document.getElementById('{!$Component.registerform.pb.pbc.password}').value;
+                var phone = document.getElementById('{!$Component.registerform.pb.pbc.phone}').value;
+                if(email.match(regex)){
+                    alert('Hello '+name+', Registration successful');
+                } else {
+                    alert('Please enter a valid email');
+                }
+            }
+
+            function redirectLogin(){
+                window.location.href = "/apex/Login_Page"
+                // window.location("https://mvclouds62-dev-ed--c.develop.vf.force.com/apex/Login_Page");
+            }
+        </script>
+</apex:page>

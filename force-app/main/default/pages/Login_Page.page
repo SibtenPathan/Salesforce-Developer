@@ -1,0 +1,25 @@
+<apex:page showHeader="false">
+        <apex:form id="loginform">
+            <apex:pageBlock id="pb" title="Login Form">
+            <apex:pageBlockSection id="pbc">
+                <apex:inputText id="email" label="Enter Email"/>
+                <apex:inputText id="password" label="Enter Password"/>
+                <apex:commandButton value="Submit" onclick="submitForm();"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        </apex:form>
+
+        <script>
+            function submitForm(){
+                var regex='^[^@]+@[^@]+\.[^@]+$';
+                var email = document.getElementById('{!$Component.loginform.pb.pbc.email}').value;
+                var password = document.getElementById('{!$Component.loginform.pb.pbc.password}').value;
+                if(email.match(regex)){
+                    alert('Hello '+name+', Loggin successful');
+                } else {
+                    alert('Please enter a valid email');
+                }
+                
+            }
+        </script>
+</apex:page>
