@@ -1,3 +1,3 @@
-trigger Trigger1 on SOBJECT (before insert) {
-
+trigger Trigger1 on Account (before insert) {
+    System.debug()
 }

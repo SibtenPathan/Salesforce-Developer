@@ -1,0 +1,36 @@
+public with sharing class sheep_triggerController {
+    public static void sheep(List<Contact> contacts) {
+       
+    Set<Id> accountIdsToUpdate = new Set<Id>();
+ 
+    for (Contact con : contacts) {
+        if (con.AccountId != null) {
+            accountIdsToUpdate.add(con.AccountId);
+        }
+    }
+
+    if (!accountIdsToUpdate.isEmpty()) {
+        
+        List<Contact> contactsToUpdate = [
+            SELECT Id, AccountId, LastName
+            FROM Contact
+            WHERE AccountId IN :accountIdsToUpdate
+        ];
+
+        
+        List<Account> accounts = [
+            SELECT Id, Name FROM Account WHERE Id IN :accountIdsToUpdate
+        ];
+
+        for (Account account : accounts) {
+            for (Contact contact : contactsToUpdate) {
+                if (contact.AccountId == account.Id) {
+                    contact.LastName = account.Name;
+                }
+            }
+        }
+ 
+        update contactsToUpdate;
+    }
+    }
+}
