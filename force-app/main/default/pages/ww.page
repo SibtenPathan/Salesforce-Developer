@@ -1,0 +1,32 @@
+<apex:page controller="AccountOpportunityController">
+    <h1>Select Account and View Opportunities</h1>
+    
+    <!-- Account Selection -->
+    <apex:form>
+        <apex:pageMessages />   
+        <apex:selectList value="{!selectedAccountId}" size="1">
+            <apex:selectOptions value="{!$ObjectType.Account.fields.Name.picklistValues}" />
+        </apex:selectList>
+        <apex:commandButton value="Load Opportunities" action="{!loadOpportunities}" rerender="opportunityList"/>
+    </apex:form>
+    
+    <!-- Opportunities List -->
+    <apex:pageBlock id="opportunityList">
+        <apex:pageBlockTable value="{!opportunities}" var="opp">
+            <apex:column value="{!opp.Name}" />
+            <apex:column value="{!opp.StageName}" />
+            <apex:column value="{!opp.CloseDate}" />
+        </apex:pageBlockTable>
+        
+        <apex:facet name="footer">
+            <apex:pageBlockButtons>
+                <apex:commandButton value="Previous" action="{!prevPage}" reRender="opportunityList" disabled="{!IF(currentPage == 1, true, false)}"/>
+                <apex:commandButton value="Next" action="{!nextPage}" reRender="opportunityList" disabled="{!IF(currentPage == totalPages, true, false)}"/>
+            </apex:pageBlockButtons>
+        </apex:facet>
+        
+        <div class="pagination">
+            Page {!currentPage} of {!totalPages}
+        </div>
+    </apex:pageBlock>
+</apex:page>

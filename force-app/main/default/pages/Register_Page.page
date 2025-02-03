@@ -28,7 +28,6 @@
 
             function redirectLogin(){
                 window.location.href = "https://mvclouds62-dev-ed--c.develop.vf.force.com/apex/Login_Page"
-                // window.location("https://mvclouds62-dev-ed--c.develop.vf.force.com/apex/Login_Page");
-            }
+               }
         </script>
 </apex:page>

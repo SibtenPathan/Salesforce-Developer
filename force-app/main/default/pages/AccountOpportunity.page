@@ -1,0 +1,7 @@
+<apex:page standardController="AccountOpportunity">
+    <apex:pageBlock title="AccountOpportunity">
+        <apex:dataTable>
+            
+        </apex:dataTable>
+    </apex:pageBlock>
+</apex:page>

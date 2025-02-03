@@ -11,7 +11,6 @@ trigger SheepProblemTrigger on Contact (after update) {
         if(accountIds != null){
             List<Contact> contacts = [SELECT Id, AccountId FROM Contact WHERE AccountId IN :accountIds];
             List<Account> accounts = [SELECT id, Name FROM Account WHERE Id IN :accountIds];
-
             for(Contact ct : contacts){ 
                 for(Account acc : accounts){
                     if(ct.AccountId == acc.Id){

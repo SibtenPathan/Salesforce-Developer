@@ -5,6 +5,8 @@
                 <apex:inputText id="email" label="Enter Email"/>
                 <apex:inputText id="password" label="Enter Password"/>
                 <apex:commandButton value="Submit" onclick="submitForm();"/>
+                <apex:commandButton value="New User?" onclick="redirectRegister();"/>
+                <apex:commandButton value="Forgot Password" onclick="resetPassword();"/>
             </apex:pageBlockSection>
         </apex:pageBlock>
         </apex:form>
@@ -20,6 +22,14 @@
                     alert('Please enter a valid email');
                 }
                 
+            }
+
+            function redirectRegister(){
+                window.location.href = "https://mvclouds62-dev-ed--c.develop.vf.force.com/apex/Register_Page";
+            }
+
+            function resetPassword(){
+                window.location.href = "https://mvclouds62-dev-ed--c.develop.vf.force.com/apex/Forgot_Password";
             }
         </script>
 </apex:page>

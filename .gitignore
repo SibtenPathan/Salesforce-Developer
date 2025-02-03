@@ -43,3 +43,5 @@ $RECYCLE.BIN/
 **/__pycache__/
 **/.venv/
 **/venv/
+force-app/main/default/pages/Pagination2.page
+force-app/main/default/pages/Pagination2.page-meta.xml
