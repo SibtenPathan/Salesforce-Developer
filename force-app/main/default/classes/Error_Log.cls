@@ -12,5 +12,5 @@ public with sharing class Error_Log {
         err.More_Details__c = e.getStackTraceString();
         System.debug('insert');
         insert err;
-    }
+    } 
 }

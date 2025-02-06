@@ -9,7 +9,7 @@ public class BatchClassTask1 implements Database.Batchable<sObject> {
         return Database.getQueryLocator(query);
         // query = SELECT Id, Name, (SELECT Id, Name FROM Opportunities) FROM Account
     }
-
+    
     public void execute(Database.BatchableContext bc, List<Account> scope){
         System.debug(scope.size());
         List<Account> accountsToUpdate = new List<Account>();

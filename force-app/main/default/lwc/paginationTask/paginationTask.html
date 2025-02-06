@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Contacts">
+        <div class="slds-m-around_medium">
+            <template for:each={contacts.data} for:item="con">
+                <p key={con.Id}>{con.Name}</p>
+            </template>
+            <button class="slds-button" onclick={previous}>Previous</button>
+            <button class="slds-button" onclick={next}>Next</button>
+        </div>
+    </lightning-card>
+</template>

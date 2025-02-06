@@ -1,0 +1,13 @@
+<template>
+    <c-child message='Hello World!' world='Hi World!'></c-child>
+    <p>Hello, {greetingMessage}</p>
+    <lightning-input label="Name" value={greeting} onchange={changeHandler}></lightning-input>
+
+    <lightning-card title="Contacts" icon-name="contact_list">
+        <div class="slds-m-around_medium">
+            <template for:each={contacts.data} for:item="con">
+                <p key={con.Id}>{con.Name}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
