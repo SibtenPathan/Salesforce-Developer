@@ -12,28 +12,79 @@ export default class LwcTask5 extends LightningElement {
     currentStep = 1;
     selectedRows;
 
+    value = 'Select Object to View Records';
+    @track data = [];
+    @track columns = [];
+
+    subject = '';
+    body = '';
+
+    @track all_Emails = [];
+    accounts;
+    contacts;
+    leads;
+    connectedCallback() {
+        getAccounts()
+            .then(result => {
+                this.accounts = result;
+            })
+            .catch(error => {
+                console.log('Error fetching Accounts: ' + error);
+
+            })
+
+        getContacts()
+            .then(result => {
+                this.contacts = result;
+            })
+            .catch(error => {
+                console.log('Error Fetching Contacts: ' + error);
+
+            })
+
+        getLeads()
+            .then(result => {
+                this.leads = result;
+            })
+            .catch(error => {
+                console.log('Error Fetching Leads: ' + error);
+
+            })
+
+
+    }
+
     handleNext() {
+        // console.log('Step next: '+this.currentStep);
         if (this.currentStep == 1) {
             if (this.value != 'Select Object to View Records') {
+                // console.log('handleNext step 1 called');
                 this.handleRowSelection();
-                this.step1 = false;
-                this.step2 = true;
-                this.currentStep++;
+                if (this.selectedRows.length == 0) {
+                    this.showErrorToast('Select ' + this.value, 'Please Select atleast 1 Value');
+                } else {
+                    this.currentStep++;
+                    this.step1 = false;
+                    this.step2 = true;
+                    // console.log('Step next after: '+this.currentStep);
+                }
             } else {
                 this.showErrorToast('Object Not Selected', 'Please select atleast 1 object');
             }
         } else if (this.currentStep == 2) {
-            if(this.subject != ''){
+            if (this.subject.trim() != '' && this.body.trim() != '') {
+                // console.log('handleNext step 2 called');
                 this.step2 = false;
-            this.step3 = true;
-            this.currentStep++;
+                this.step3 = true;
+                this.currentStep++;
             } else {
-                this.showErrorToast('Subject Field is compulsory', 'Please enter subject field');
+                this.showErrorToast('Both Fields are compulsory', 'Please enter both the fields');
             }
         }
     }
 
     handleBack() {
+        console.log('Step back: ' + this.currentStep);
         if (this.currentStep == 3) {
             this.step3 = false;
             this.step2 = true;
@@ -45,6 +96,14 @@ export default class LwcTask5 extends LightningElement {
         }
     }
 
+    get backDisabled() {
+        return this.currentStep === 1;
+    }
+
+    get nextDisabled(){
+        return this.currentStep === 3;
+    }
+    
     showErrorToast(title, message) {
         const evt = new ShowToastEvent({
             title: title,
@@ -67,10 +126,6 @@ export default class LwcTask5 extends LightningElement {
 
 
     // Section1 
-    value = 'Select Object to View Records';
-    @track data = [];
-    @track columns = [];
-
     get options() {
         return [
             { label: 'Account', value: 'Account' },
@@ -86,136 +141,99 @@ export default class LwcTask5 extends LightningElement {
 
     getRecords() {
         if (this.value == 'Account') {
-            getAccounts()
-                .then(result => {
-                    this.data = result;
-                    this.columns = [{
-                        label: 'Name',
-                        fieldName: 'Name',
-                        type: 'text'
-                    },
-                    {
-                        label: 'Email',
-                        fieldName: 'Email__c',
-                        type: 'Email'
-                    }]
-                    console.log(result);
-                })
-                .catch(error => {
-                    console.log('Error fetching Accounts: ' + error);
-
-                })
+            this.data = this.accounts;
+            this.columns = [{
+                label: 'Name',
+                fieldName: 'Name',
+                type: 'text'
+            },
+            {
+                label: 'Email',
+                fieldName: 'Email__c',
+                type: 'Email'
+            }]
         } else if (this.value == 'Contact') {
-            getContacts()
-                .then(result => {
-                    this.data = result;
-                    this.columns = [{
-                        label: 'Name',
-                        fieldName: 'Name',
-                        type: 'text'
-                    },
-                    {
-                        label: 'Email',
-                        fieldName: 'Email',
-                        type: 'Email'
-                    }]
-                    console.log(result);
-                })
-                .catch(error => {
-                    console.log('Error fetching Contacts: ' + error);
-
-                })
+            this.data = this.contacts;
+            this.columns = [{
+                label: 'Name',
+                fieldName: 'Name',
+                type: 'text'
+            },
+            {
+                label: 'Email',
+                fieldName: 'Email',
+                type: 'Email'
+            }]
         } else if (this.value == 'Lead') {
-            getLeads()
-                .then(result => {
-                    this.data = result;
-                    this.columns = [{
-                        label: 'Name',
-                        fieldName: 'Name',
-                        type: 'text'
-                    },
-                    {
-                        label: 'Email',
-                        fieldName: 'Email',
-                        type: 'Email'
-                    }]
-                    console.log(result);
-                })
-                .catch(error => {
-                    console.log('Error fetching Leads: ' + error);
-
-                })
+            this.data = this.leads;
+            this.columns = [{
+                label: 'Name',
+                fieldName: 'Name',
+                type: 'text'
+            },
+            {
+                label: 'Email',
+                fieldName: 'Email',
+                type: 'Email'
+            }]
         }
     }
 
     handleRowSelection() {
+        this.selectedRows = [];
         this.selectedRows = this.template.querySelector('lightning-datatable').getSelectedRows();
         console.log('Selected rows:', this.selectedRows);
     }
 
     // Section2
-    subject;
-    body;
-
     handleChange2(event) {
         this[event.target.name] = event.target.value;
     }
 
     // section3
-    @track all_Emails = []; // Ensure reactivity
     send() {
-        this.all_Emails = []; // Reset the array before adding new emails
+        this.all_Emails = [];
         if (this.selectedRows && this.selectedRows.length > 0) {
-            let tempEmails = []; // Temporary array to store emails
             this.selectedRows.forEach(element => {
                 if (element.Email) {
                     console.log(element.Email);
-                    tempEmails.push(element.Email); // Push emails into the temp array
-                } else{
+                    this.all_Emails.push(element.Email);
+                } else {
                     console.log(element.Email__c);
-                    tempEmails.push(element.Email__c);
+                    this.all_Emails.push(element.Email__c);
                 }
             });
-            this.all_Emails = [...tempEmails]; // Update the tracked array in one go
         }
-        console.log('Stored Emails:', JSON.stringify(this.all_Emails)); // Debugging
+        console.log('Stored Emails:', JSON.stringify(this.all_Emails));
 
         sendMails({ emailIds: this.all_Emails, subject: this.subject, body: this.body })
             .then(result => {
                 console.log(result);
                 if (result) {
-                    this.ShowSuccessToast('Main Sent Succesfully', 'Your Mails has been sent');
-                    this.subject = '';
-                    this.body = '';
-                    this.step1 = true;
-                    this.step2 = false;
-                    this.step3 = false;
-                    this.value = 'Select Object to View Records'
-                    this.data = [];
+                    this.ShowSuccessToast('Mail Sent Succesfully', 'Your Mails has been sent');
+                    this.clear();
                 } else {
                     this.showErrorToast('Error', 'Error Sending Email please check Email Address');
-                    this.subject = '';
-                    this.body = '';
-                    this.step1 = true;
-                    this.step2 = false;
-                    this.step3 = false;
-                    this.value = 'Select Object to View Records'
-                    this.data = [];
                 }
 
             })
             .catch(error => {
                 console.log(error);
                 this.showErrorToast('Error', 'Error Sending Email please check Email Address');
-                this.subject = '';
-                    this.body = '';
-                    this.step1 = true;
-                    this.step2 = false;
-                    this.step3 = false;
-                    this.value = 'Select Object to View Records'
-                    this.data = [];
-
             })
 
+    }
+
+    clear(){
+        console.log('clear method called');
+        this.subject = '';
+        this.body = '';
+        this.data = [];
+        this.columns = [];
+        this.value = 'Select Object to View Records';
+        this.step1 = true;
+        this.step2 = false;
+        this.step3 = false;
+        this.currentStep = 1;
     }
 }

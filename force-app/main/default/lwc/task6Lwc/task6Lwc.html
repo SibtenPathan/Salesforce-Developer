@@ -7,13 +7,13 @@
 
     <lightning-card>
         <div class="slds-p-around_medium lgc-bg">
-            <template if:true={options}> <!-- Prevents rendering issues -->
+            <template if:true={options}>
                 <lightning-dual-listbox 
                     name="languages"
-                    label="Select Languages"
+                    label="Select Objects"
                     source-label="Available"
                     selected-label="Selected"
-                    field-level-help="Select your preferred languages"
+                    field-level-help="Select Objects you want to Search in"
                     options={options}
                     onchange={handleChange}>
                 </lightning-dual-listbox>
@@ -28,10 +28,15 @@
          </lightning-card>
          <template if:true={searchResults}>
             <lightning-card title="Search Results">
-                <div class="slds-p-around_medium">
+                <!-- <div class="slds-p-around_medium">
                     <template for:each={searchResults} for:item="record">
                         <p key={record.Id}>{record.Name} ({record.Id})</p>
                     </template>
+                </div> -->
+                <div class="slds-m-around_medium">
+                    <lightning-datatable data={searchResults} columns={columns} key-field="Id">
+        
+                    </lightning-datatable>
                 </div>
             </lightning-card>
         </template>

@@ -8,7 +8,17 @@ export default class Task6Lwc extends LightningElement {
     @track _selected = [];
     @track searchResults = [];
 
-    @wire(getObjects)
+    @track columns = [{
+        label: 'Id',
+        fieldName: 'Id',
+        type: 'text'
+    },{
+        label: 'Name',
+        fieldName: 'Name',
+        type: 'text'
+    }]
+
+    @wire(getObjects)   
     wiredObjects({ error, data }) {
         if (data) {
             this.options = data.map(obj => ({
@@ -42,6 +52,8 @@ export default class Task6Lwc extends LightningElement {
             .then(result => {
                 console.log('Search Results:', result);
                 this.searchResults = result;
+                console.log('searchResults: ', this.searchResults);
+                
             })
             .catch(error => {
                 console.error('Error in search:', error);
