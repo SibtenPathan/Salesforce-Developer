@@ -1,0 +1,38 @@
+<template>
+    <lightning-card title="SOSL Search">
+        <div class="slds-p-around_medium lgc-bg">
+            <lightning-input name="search" value={searchValue} type="text" label="Search Here" onchange={handleSearch}></lightning-input>
+        </div>
+    </lightning-card>
+
+    <lightning-card>
+        <div class="slds-p-around_medium lgc-bg">
+            <template if:true={options}> <!-- Prevents rendering issues -->
+                <lightning-dual-listbox 
+                    name="languages"
+                    label="Select Languages"
+                    source-label="Available"
+                    selected-label="Selected"
+                    field-level-help="Select your preferred languages"
+                    options={options}
+                    onchange={handleChange}>
+                </lightning-dual-listbox>
+            </template>
+            <br>
+            <div class="slds-box">
+                <p>Selected values are: {selected}</p>
+            </div>
+            <br>
+        <lightning-button variant="brand" label="Search" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+        </div>
+         </lightning-card>
+         <template if:true={searchResults}>
+            <lightning-card title="Search Results">
+                <div class="slds-p-around_medium">
+                    <template for:each={searchResults} for:item="record">
+                        <p key={record.Id}>{record.Name} ({record.Id})</p>
+                    </template>
+                </div>
+            </lightning-card>
+        </template>
+</template>

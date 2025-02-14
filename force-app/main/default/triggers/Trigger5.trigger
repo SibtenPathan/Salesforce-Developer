@@ -23,7 +23,7 @@ trigger Trigger5 on Account (after Update) {
         mail.setTargetObjectId(ct.Id);
         mails.add(mail);
     }
-
+ 
     if(!mails.isEmpty()){
         Messaging.sendEmail(mails);
         System.debug('Sent');

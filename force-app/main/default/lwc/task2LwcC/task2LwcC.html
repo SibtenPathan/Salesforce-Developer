@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Image Previews">
+        <div class="slds-m-around_medium">
+            <template for:each={imageData} for:item="image">
+                <div key={image.url} class="slds-box slds-box_xx-small slds-m-bottom_small">
+                    <img src={image.url} alt={image.name} class="image-preview" />
+                    <p>{image.name}</p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

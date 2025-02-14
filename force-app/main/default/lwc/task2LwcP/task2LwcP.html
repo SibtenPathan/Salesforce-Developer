@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="File Upload">
+        <div class="slds-m-around_medium">
+            <lightning-input type="file" multiple="" label="Upload Image" accept=".png,.jpg,.jpeg" onchange={handleFileChange}></lightning-input>
+        </div>
+
+        <template if:true={imageData}>
+            <c-task2-lwc-c image-data={imageData}></c-task2-lwc-c>
+        </template>
+    </lightning-card>
+</template>

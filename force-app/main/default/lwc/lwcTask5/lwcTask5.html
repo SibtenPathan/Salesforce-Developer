@@ -1,0 +1,48 @@
+<template>
+    <lightning-card>
+        <lightning-button variant="brand" label="Back" onclick={handleBack} class="slds-m-left_x-small"></lightning-button>
+        <lightning-button variant="brand" label="Next" onclick={handleNext} class="slds-m-left_x-small"></lightning-button>
+    </lightning-card>
+
+    <!-- Section 1 -->
+    <template if:true={step1}>
+        <lightning-card title="Select Object">
+            <div class="slds-m-around_medium">
+                <lightning-combobox name="progress" label="Object List" value="" placeholder="Select Here" options={options}
+                    onchange={handleChange1} required></lightning-combobox>
+            </div>
+        </lightning-card>
+    
+        <template if:true={data}>
+            <lightning-card title={value}>
+                <div class="slds-m-around_medium">
+                    <lightning-datatable data={data} columns={columns} key-field="Id">
+        
+                    </lightning-datatable>
+                </div>
+            </lightning-card>
+        </template>
+    </template> 
+
+    <!-- Section2 -->
+    <template if:true={step2}>
+        <lightning-card title="Draft you Email Here">
+            <div class="slds-p-around_medium">
+                <lightning-input type="text" name="subject" value={subject} placeholder="Email Subject" label="Subject" onchange={handleChange2}></lightning-input>
+                <lightning-textarea name="body" value={body} placeholder="Email Body Here" onchange={handleChange2}></lightning-textarea>
+            </div>
+        </lightning-card>
+    </template>     
+
+
+    <!-- Section3 -->
+    <template if:true={step3}>
+        <lightning-card title="Draft you Email Here">
+            <div class="slds-p-around_medium">
+                <lightning-input type="text" label="Subject" value={subject} readonly></lightning-input>
+                <lightning-textarea readonly value={body} label="Body" ></lightning-textarea>
+            </div>
+            <lightning-button variant="brand" label="Send Mail" onclick={send} class="slds-m-left_x-small"></lightning-button>
+        </lightning-card>
+    </template>
+</template>

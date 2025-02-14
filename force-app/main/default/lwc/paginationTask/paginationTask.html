@@ -1,11 +1,10 @@
 <template>
     <lightning-card title="Contacts">
         <div class="slds-m-around_medium">
-            <template for:each={contacts.data} for:item="con">
-                <p key={con.Id}>{con.Name}</p>
-            </template>
-            <button class="slds-button" onclick={previous}>Previous</button>
-            <button class="slds-button" onclick={next}>Next</button>
+            <lightning-datatable key-field="id" data={data} columns={columns}></lightning-datatable>
+           
+            <button class="slds-button" onclick={previous} disabled={isFirstPage}>Previous</button>
+            <button class="slds-button" onclick={next} disabled={isLastPage}>Next</button>
         </div>
     </lightning-card>
 </template>
