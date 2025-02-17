@@ -12,4 +12,4 @@ trigger Trigger6 on Opportunity (after Update) {
             }
         }
     }
-}
+}   

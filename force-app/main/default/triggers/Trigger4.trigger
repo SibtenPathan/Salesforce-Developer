@@ -4,4 +4,4 @@ trigger Trigger4 on Opportunity (after insert) {
         opp.Type = 'New Customer';
     }
     Update opps;
-}
+} 
