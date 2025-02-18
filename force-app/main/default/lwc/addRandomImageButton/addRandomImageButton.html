@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Attach Random Image">
+        <div class="slds-m-around_medium">
+            <lightning-button label="Add Random Image" variant="brand" onclick={handleClick} disabled={isLoading}>
+            </lightning-button>
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading..." size="small"></lightning-spinner>
+            </template>
+        </div>
+    </lightning-card>
+</template>
