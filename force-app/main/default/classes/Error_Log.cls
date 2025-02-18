@@ -1,7 +1,4 @@
 public with sharing class Error_Log {
-    public Error_Log() {
-        
-    }
     public static void insertErrorLog(Exception e, String className, String methodName){
         Error_Log__c err = new Error_Log__c();
         err.Class_Name__c = className;
