@@ -1,0 +1,23 @@
+<aura:component controller="auraTask2"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,lightning:actionOverride">
+
+    <!-- Picklist-->
+    <aura:attribute name="options" type="List" default="[]" />
+
+    <aura:handler name="init" value="{! this }" action="{! c.getOptions }" />
+
+    <lightning:combobox name="accounts" label="Account Options" placeholder="Select an Account" options="{! v.options }"
+        onchange="{! c.handleChange }"/>
+
+
+    <!-- Attribute to store the list of contacts -->
+    <aura:attribute name="contacts" type="Contact[]" default="[]" />
+
+    <!-- Display the contacts -->
+    <lightning:card title="Contact List">
+        <aura:iteration items="{!v.contacts}" var="contact">
+            <p>{!contact.Name}</p>
+        </aura:iteration>
+    </lightning:card>
+
+</aura:component>

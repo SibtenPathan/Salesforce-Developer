@@ -1,0 +1,17 @@
+<aura:component controller="auraTask1" implements="flexipage:availableForAllPageTypes,force:appHostable">
+    <aura:attribute name="contactRecord" type="Contact" default="{ 'sobjectType': 'Contact' }" />
+    <aura:attribute name="isLoading" type="Boolean" default="false" />
+
+    <lightning:card title="Create Contact">
+        <div class="slds-p-around_small">
+            <lightning:input label="Full Name" value="{!v.contactRecord.LastName}" required="true" />
+
+            <lightning:input label="Phone" value="{!v.contactRecord.Phone}" type="tel" />
+
+            <lightning:input label="Email" value="{!v.contactRecord.Email}" type="email" />
+
+            <lightning:button label="Create Contact" variant="brand" onclick="{!c.createContact}"
+                disabled="{!v.isLoading}" />
+        </div>
+    </lightning:card>
+</aura:component>

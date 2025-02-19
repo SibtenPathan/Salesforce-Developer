@@ -1,4 +1,4 @@
-import { LightningElement, api, track, wire } from 'lwc';
+xximport { LightningElement, api, track, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import createAccount from '@salesforce/apex/AccountLWC.createAccount';
 import getAccounts from '@salesforce/apex/AccountLWC.getAccounts';
