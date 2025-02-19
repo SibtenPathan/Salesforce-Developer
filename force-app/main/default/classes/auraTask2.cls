@@ -16,7 +16,7 @@ public with sharing class auraTask2 {
     @AuraEnabled
     public static List<Contact> getContactsForAccount(Id accountId){
         System.debug('getContactsForAccount()');
-        List<Contact> contacts = [SELECT Id, Name FROM Contact WHERE AccountId = :accountId];
+        List<Contact> contacts = [SELECT Id, Name, Phone, Email FROM Contact WHERE AccountId = :accountId];
         return contacts;
     }
 }
