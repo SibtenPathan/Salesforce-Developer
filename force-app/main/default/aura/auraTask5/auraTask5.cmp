@@ -1,0 +1,38 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable">
+
+    <lightning:icon iconName="action:preview" alternativeText="Preview" title="Preview" />
+
+    <aura:attribute name="url" type="String" />
+    <aura:attribute name="backgroundColor" type="String" />
+    <aura:attribute name="description" type="String" />
+    <aura:attribute name="fontSize" type="Integer" />
+    <aura:attribute name="color" type="String" />
+    <aura:attribute name="Step" type="Integer" default="0" />
+
+    <aura:if isTrue="{!v.Step == 0}">
+        <lightning:card title="AuraTask5">
+            <div class="slds-p-around_medium">
+                <lightning:input name="url" label="URL" value="{!v.url}"/>
+                <lightning:input name="backgroundColor" label="Background Color" value="{!v.backgroundColor}"/>
+                <lightning:input name="description" label="Description" value="{!v.description}"/>
+                <lightning:input name="fontSize" label="Font Size" value="{!v.fontSize}"/>
+                <lightning:input name="color" label="Font Color" value="{!v.color}"/>
+                <lightning:button label="Display" variant="brand" onclick="{! c.handleClick }" />
+            </div>
+        </lightning:card>
+    </aura:if>
+
+    <aura:if isTrue="{!v.Step == 1}">
+    <lightning:card>
+        <div class="slds-p-around_medium myDiv" style="{! 'background-color:' + v.backgroundColor + '; color:' + v.color + '; font-size:' + v.fontSize + 'px;'}">
+            <div class="image slds-p-around_medium slds-grid slds-grid_vertical-align-center slds-size_1-of-2">
+                <img src="{!v.url}" alt="Image" class="slds-image slds-image_medium slds-m-bottom_medium" />
+            </div>
+            <div class="slds-m-left_medium">
+                <p>Description: {!v.description}</p>    
+            </div>
+        </div>
+    </lightning:card>
+</aura:if>
+
+</aura:component>

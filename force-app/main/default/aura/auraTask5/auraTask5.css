@@ -1,0 +1,8 @@
+.THIS .myDiv {
+    display: flex;
+}
+
+.THIS img {
+    height: 300px;
+    width: auto;
+}

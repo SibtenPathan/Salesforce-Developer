@@ -1,0 +1,23 @@
+<aura:component controller="auraTask7"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,lightning:actionOverride">
+
+    <aura:attribute name="accounts" type="List" default="[]" />
+    <aura:attribute name="selectedAccountId" type="String" />
+    <!-- <aura:attribute name="data" type="List" />
+    <aura:attribute name="columns" type="List" /> -->
+
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+
+    <lightning:card title="Contacts and Opportunities with Related Account">
+        <div class="slds-p-around_medium">
+            <lightning:combobox name="Accounts" label="Account Options" placeholder="Select an Account"
+                options="{! v.accounts }" onchange="{! c.handleChange }" />
+                
+
+            <!-- <div class="slds-m-top_medium">
+                <lightning:datatable keyField="Id" data="{! v.data }" columns="{! v.columns }"
+                    hideCheckboxColumn="true"/>
+            </div> -->
+        </div>
+    </lightning:card>
+</aura:component>

@@ -1,22 +1,26 @@
 public with sharing class auraTask2 {
     @AuraEnabled
-    public static List<Contact> getContacts() {
-        System.debug('getContacts()');
-        List<Contact> contacts = [SELECT Id, Name FROM Contact LIMIT 10];
-        return contacts;
-    }
-
-    @AuraEnabled
     public static List<Account> getAccounts() {
-        System.debug('getAccounts()');
-        List<Account> accounts = [SELECT Id, Name FROM Account];
-        return accounts;
+        return [SELECT Id, Name FROM Account];
     }
 
     @AuraEnabled
     public static List<Contact> getContactsForAccount(Id accountId) {
-        System.debug('getContactsForAccount()');
-        List<Contact> contacts = [SELECT Id, Name, Phone, Email FROM Contact WHERE AccountId = :accountId];
-        return contacts;
+        return [SELECT Id, Name, Phone, Email FROM Contact WHERE AccountId = :accountId];
+    }
+
+    @AuraEnabled
+    public static Map<String, Object> getContactsForAccountPaginated(Id accountId, Integer pageNumber, Integer pageSize) {
+        Integer offsetValue = (pageNumber - 1) * pageSize;
+        List<Contact> contacts = [SELECT Id, Name, Phone, Email FROM Contact WHERE AccountId = :accountId LIMIT :pageSize OFFSET :offsetValue];
+
+        Integer totalRecords = [SELECT COUNT() FROM Contact WHERE AccountId = :accountId];
+
+        Map<String, Object> result = new Map<String, Object>();
+        result.put('contacts', contacts);
+        result.put('totalRecords', totalRecords);
+        result.put('currentPage', pageNumber);
+
+        return result;
     }
 }

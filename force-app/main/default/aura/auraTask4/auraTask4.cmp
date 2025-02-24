@@ -1,0 +1,66 @@
+<aura:component controller="AuraTask4" implements="flexipage:availableForAllPageTypes,force:appHostable">
+
+    <aura:attribute name="accountRecord" type="Account" default="{ 'sobjectType': 'Account' }" />
+    <aura:attribute name="contactRecord" type="Contact" default="{ 'sobjectType': 'Contact' }" />
+    <aura:attribute name="eventRecord" type="Event" default="{ 'sobjectType': 'Event' }" />
+    <aura:attribute name="accId" type="Id" />
+    <aura:attribute name="contactId" type="Id" />
+    <aura:attribute name="currentStep" type="Integer" default="1" />
+
+    <lightning:card>
+        <lightning:progressIndicator currentStep="{!v.currentStep}">
+            <lightning:progressStep label="Step One" value="{!1}" />
+            <lightning:progressStep label="Step Two" value="{!2}" />
+            <lightning:progressStep label="Step Three" value="{!3}" />
+        </lightning:progressIndicator>
+    </lightning:card>
+
+    <aura:if isTrue="{!v.currentStep == 1}">
+        <lightning:card title="Create Account">
+
+            <div class="slds-p-around_small">
+                <lightning:input label="Account Name" value="{!v.accountRecord.Name}" required="true" />
+
+                <lightning:input label="Phone" value="{!v.accountRecord.Phone}" type="tel" />
+
+                <lightning:button class="slds-m-top_small" label="Prev" variant="neutral" onclick="{!c.previous}"
+                    disabled="true"></lightning:button>
+
+                <lightning:button class="slds-m-top_small" label="Next" variant="brand" onclick="{!c.createAccount}" />
+
+            </div>
+        </lightning:card>
+    </aura:if>
+
+    <aura:if isTrue="{!v.currentStep == 2}">
+        <lightning:card title="Create Contact">
+            <div class="slds-p-around_small">
+                <lightning:input label="Name" value="{!v.contactRecord.LastName}" required="true"></lightning:input>
+
+                <lightning:input label="Account Name" value="{!v.accountRecord.Name}" disabled="true"></lightning:input>
+
+                <lightning:button class="slds-m-top_small" label="Prev" variant="neutral" onclick="{!c.previous}">
+                </lightning:button>
+
+                <lightning:button class="slds-m-top_small" label="Next" variant="brand" onclick="{!c.createContact}" />
+            </div>
+        </lightning:card>
+    </aura:if>
+
+    <aura:if isTrue="{!v.currentStep == 3}">
+        <lightning:card title="Create Event">
+            <div class="slds-p-around_small">
+                <lightning:input name="subject" placeholder="Wizard Task" disabled="true" label="Subject" />
+
+                <lightning:input type="datetime" value="{!v.eventRecord.StartDateTime}" label="Enter Start" />
+
+                <lightning:input type="datetime" value="{!v.eventRecord.EndDateTime}" label="Enter End" />
+
+                <lightning:button class="slds-m-top_small" label="Prev" variant="neutral" onclick="{!c.previous}">
+                </lightning:button>
+
+                <lightning:button class="slds-m-top_small" label="Save" variant="brand" onclick="{!c.createEvent}" />
+            </div>
+        </lightning:card>
+    </aura:if>
+</aura:component>

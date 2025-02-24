@@ -1,9 +1,14 @@
-<aura:component controller="auraTask2"
+<aura:component controller="auraTask2" 
     implements="force:appHostable,flexipage:availableForAllPageTypes,lightning:actionOverride">
 
     <aura:attribute name="accounts" type="List" default="[]" />
-    <aura:attribute name="data" type="Object" />
+    <aura:attribute name="selectedAccountId" type="String" />
+    <aura:attribute name="data" type="List" />
     <aura:attribute name="columns" type="List" />
+    <aura:attribute name="currentPage" type="Integer" default="1" />
+    <aura:attribute name="pageSize" type="Integer" default="2" />
+    <aura:attribute name="totalRecords" type="Integer" />
+    <aura:attribute name="totalPages" type="Integer" />
 
     <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
 
@@ -12,9 +17,18 @@
             <lightning:combobox name="Accounts" label="Account Options" placeholder="Select an Account"
                 options="{! v.accounts }" onchange="{! c.handleChange }" />
 
+                <div class="slds-m-top_medium">
+                    <p>Total Records: {! v.totalRecords}</p>
+                </div>
             <div class="slds-m-top_medium">
-                <lightning:datatable keyField="id" data="{! v.data }" columns="{! v.columns }"
+                <lightning:datatable keyField="Id" data="{! v.data }" columns="{! v.columns }"
                     hideCheckboxColumn="true" />
+            </div>
+
+            <div class="slds-m-top_medium slds-grid slds-grid_align-spread">
+                <lightning:button label="Previous" onclick="{! c.previousPage }" disabled="{! v.currentPage == 1 }"/>
+                <p>Page {! v.currentPage } of {! v.totalPages }</p>
+                <lightning:button label="Next" onclick="{! c.nextPage }" disabled="{! v.currentPage == v.totalPages }"/>
             </div>
         </div>
     </lightning:card>
