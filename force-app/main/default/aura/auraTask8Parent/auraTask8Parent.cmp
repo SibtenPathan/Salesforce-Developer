@@ -1,0 +1,15 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,lightning:actionOverride">
+    <aura:attribute name="uploadedImage" type="String" />
+    
+    <!-- Correct way to handle component event -->
+    <aura:handler event="c:ImageUploadEvent" action="{!c.handleImageUpload}" />
+    
+    <c:auraTask8Child /> <!-- Child component included -->
+    
+    <lightning:card>
+        <p>Uploaded Image Preview:</p>
+        <aura:if isTrue="{!not(empty(v.uploadedImage))}">
+            <img src="{!v.uploadedImage}" alt="Uploaded Image" style="max-width: 300px;" />
+        </aura:if>
+    </lightning:card>
+</aura:component>

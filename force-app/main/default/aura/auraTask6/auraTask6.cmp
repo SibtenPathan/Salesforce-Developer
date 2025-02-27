@@ -1,0 +1,20 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable">
+
+    <aura:attribute name="step" type="Integer" default="{! 1}" />
+
+    <lightning:card>
+        <lightning:progressIndicator currentStep="{!v.step}">
+            <lightning:progressStep label="Step One" value="{! 1}" />
+            <lightning:progressStep label="Step Two" value="{! 2}" />
+            <lightning:progressStep label="Step Three" value="{! 3}" />
+            <lightning:progressStep label="Step Four" value="{! 4}" />
+            <lightning:progressStep label="Step Five" value="{! 5}" />
+        </lightning:progressIndicator>
+
+        <div class="slds-p-around_medium slds-m-left_large">
+            <lightning:button variant="brand" label="Prev" onclick="{! c.prev }" />
+            <lightning:button variant="brand" label="Next" onclick="{! c.next }" />
+        </div>
+
+    </lightning:card>
+</aura:component>

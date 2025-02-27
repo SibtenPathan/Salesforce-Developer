@@ -1,0 +1,8 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,lightning:actionOverride">
+    <!-- Register the event -->
+    <!-- <aura:registerEvent name="ImageUploadEvent" type="c:ImageUploadEvent"/> -->
+
+    <lightning:card>
+        <lightning:input type="file" aura:id="fileInput" label="Upload Image" onchange="{!c.handleFileChange}"/>
+    </lightning:card>
+</aura:component>

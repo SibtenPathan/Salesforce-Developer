@@ -1,0 +1,71 @@
+<aura:component controller="auraTask3" implements="flexipage:availableForAllPageTypes,force:appHostable">
+    
+    <aura:attribute name="accounts1" type="List" />
+    <aura:attribute name="accounts2" type="List" />
+    <aura:attribute name="options1" type="List" default="[]" />
+    <aura:attribute name="options2" type="List" default="[]" />
+    <aura:attribute name="account1" type="Id" />
+    <aura:attribute name="account2" type="Id" />
+    <aura:attribute name="contact1" type="List" />
+    <aura:attribute name="contact2" type="List" />
+    <aura:attribute name="isLoading" type="boolean" default="false" />
+    <aura:attribute name="draggedContact" type="Object" />
+
+    <lightning:card>
+        <div class="slds-p-around_medium flex slds-grid slds-wrap">
+            <!-- First Contact List -->
+            <div class="slds-p-around_medium slds-size_1-of-2 slds-medium-size_1-of-2" ondrop="{! c.handleDrop }"
+                ondragover="{! c.handleDragOver }" data-list="contact1">
+                <div onkeyup="{! c.handleKeyUp1 }">
+                    <lightning:input aura:id="enter-search-1" name="enter-search"
+                        label="Search when user hits the 'enter' key" type="search" />
+                </div>
+                <aura:if isTrue="{! not(empty(v.options1)) }">
+                    <div>
+                        <lightning:combobox name="Account1Options" label="Related Accounts"
+                            placeholder="Select an Account" options="{! v.options1 }" onchange="{! c.setAccount1 }" />
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{! not(empty(v.contact1)) }">
+                    <div class="draggable-list">
+                        <aura:iteration items="{! v.contact1 }" var="item">
+                            <div class="draggable-item" draggable="true" ondragstart="{! c.handleDragStart }"
+                                data-id="{! item.Id }">
+                                <p>{! item.Name }</p>
+                            </div>
+                        </aura:iteration>
+                    </div>
+                </aura:if>
+            </div>
+
+            <!-- Second Contact List -->
+            <div class="slds-p-around_medium slds-size_1-of-2 slds-medium-size_1-of-2" ondrop="{! c.handleDrop }"
+                ondragover="{! c.handleDragOver }" data-list="contact2">
+                <div onkeyup="{! c.handleKeyUp2 }">
+                    <lightning:input aura:id="enter-search-2" name="enter-search"
+                        label="Search when user hits the 'enter' key" type="search" />
+                </div>
+                <aura:if isTrue="{! not(empty(v.options2)) }">
+                    <div>
+                        <lightning:combobox name="Account2Options" label="Related Accounts"
+                            placeholder="Select an Account" options="{! v.options2 }" onchange="{! c.setAccount2 }" />
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{! not(empty(v.contact2)) }">
+                    <div class="draggable-list">
+                        <aura:iteration items="{! v.contact2 }" var="item">
+                            <div class="draggable-item" draggable="true" ondragstart="{! c.handleDragStart }"
+                                data-id="{! item.Id }">
+                                <p>{! item.Name }</p>
+                            </div>
+                        </aura:iteration>
+                    </div>
+                </aura:if>
+            </div>
+        </div>
+    </lightning:card>
+
+    <aura:if isTrue="{! v.isLoading }">
+        <lightning:spinner alternativeText="Loading" size="large" />
+    </aura:if>
+</aura:component>

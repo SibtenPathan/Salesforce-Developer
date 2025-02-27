@@ -3,8 +3,10 @@
 
     <aura:attribute name="accounts" type="List" default="[]" />
     <aura:attribute name="selectedAccountId" type="String" />
-    <!-- <aura:attribute name="data" type="List" />
-    <aura:attribute name="columns" type="List" /> -->
+    <aura:attribute name="contacts" type="List" />
+    <aura:attribute name="contactColumns" type="List" />
+    <aura:attribute name="opportunities" type="List" />
+    <aura:attribute name="opportunityColumns" type="List" />
 
     <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
 
@@ -12,12 +14,26 @@
         <div class="slds-p-around_medium">
             <lightning:combobox name="Accounts" label="Account Options" placeholder="Select an Account"
                 options="{! v.accounts }" onchange="{! c.handleChange }" />
-                
-
-            <!-- <div class="slds-m-top_medium">
-                <lightning:datatable keyField="Id" data="{! v.data }" columns="{! v.columns }"
-                    hideCheckboxColumn="true"/>
-            </div> -->
+            <lightning:button class="slds-m-top_small" variant="brand" label="Search" onclick="{! c.handleClick }" />
         </div>
     </lightning:card>
+
+    <aura:if isTrue="{! not(empty(v.contacts)) }">
+        <lightning:card title="Contacts">
+            <div class="slds-m-around_medium">
+                    <lightning:datatable keyField="Id" data="{! v.contacts }" columns="{! v.contactColumns }"
+                        hideCheckboxColumn="true" />
+            </div>
+        </lightning:card>
+    </aura:if>
+    
+
+    <aura:if isTrue="{! not(empty(v.opportunities))}">
+        <lightning:card title="Opportunities">
+        <div class="slds-m-around_medium">
+            <lightning:datatable keyField="Id" data="{! v.opportunities }" columns="{! v.opportunityColumns }"
+                hideCheckboxColumn="true" />
+        </div>
+    </lightning:card>
+    </aura:if>
 </aura:component>

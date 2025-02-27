@@ -12,7 +12,7 @@
                 });
                 component.set("v.accounts", formattedAccounts);
             }
-        });
+        }); 
         $A.enqueueAction(action);
     },
 

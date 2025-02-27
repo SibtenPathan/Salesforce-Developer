@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="Pass uploaded image from child to parent">
+    <aura:attribute name="imageData" type="String"/>
+</aura:event>
