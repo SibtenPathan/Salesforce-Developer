@@ -1,0 +1,17 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,lightning:actionOverride">
+    <aura:attribute name="receivedMessage" type="String" />
+
+    <lightning:card title="child component">
+        <div class="slds-p-around_medium">
+            <c:auraTask8Child sendImageString="{!c.handleMessage}" />
+
+            <aura:if isTrue="{! not(empty(v.receivedMessage)) }">
+                <div class="slds-m-top_medium">
+                    <h2>Parent Component</h2>
+                    <img src="{!v.receivedMessage}" alt="Image received from child component"
+                        style="max-width: 300px; max-height: 300px;" />
+                </div>
+            </aura:if>
+        </div>
+    </lightning:card>
+</aura:component>

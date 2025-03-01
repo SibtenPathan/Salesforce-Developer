@@ -1,0 +1,13 @@
+<aura:component>
+    <aura:registerEvent name="sendImageString" type="c:imageUploaded" />
+    <aura:attribute name="baseString" type="String" />
+
+    <!-- <lightning:card> -->
+        <!-- <div class="slds-m-around_medium"> -->
+            <lightning:input name="file" type="file" label="Upload Image" onchange="{! c.handleFilesChange }" />
+            <div class="slds-m-top_medium">
+                <lightning:button variant="brand" label="Send to Parent" onclick="{!c.sendMessage}" />
+            </div>
+        <!-- </div>
+    </lightning:card> -->
+</aura:component>
