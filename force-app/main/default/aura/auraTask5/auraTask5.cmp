@@ -2,7 +2,7 @@
 
     <!-- Task5 and Task 6 names have been changed with each other -->
      
-    <lightning:icon iconName="action:preview" alternativeText="Preview" title="Preview" />
+    <!-- <lightning:icon iconName="action:preview" alternativeText="Preview" title="Preview" /> -->
 
     <aura:attribute name="url" type="String" />
     <aura:attribute name="backgroundColor" type="String" />

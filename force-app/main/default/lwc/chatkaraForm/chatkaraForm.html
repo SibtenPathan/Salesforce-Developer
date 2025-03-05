@@ -1,0 +1,48 @@
+<template>     
+    <lightning-card title="Chatkara">         
+        <div class="slds-p-around_medium">             
+            <div class="slds-grid slds-gutters">                 
+                <div class="slds-col">                     
+                    <lightning-input name="name" type="text" label="Name" value={name} required="true" onchange={handleChange}></lightning-input>                 
+                </div>                 
+                <div class="slds-col">                     
+                    <lightning-input name="phone" type="text" value={phone} label="Phone" onchange={handleChange}></lightning-input>                 
+                </div>             
+            </div>             
+            <div class="slds-grid slds-gutters">                 
+                <div class="slds-col slds-size_1-of-2 slds-m-top_large">                     
+                    <lightning-input name="box40" type="checkbox" label="Gola(Rs. 40)" checked={box40} onchange={handleChange}></lightning-input>                 
+                </div>                 
+                <div class="slds-col slds-size_1-of-2">                     
+                    <lightning-input name="quantity40" type="number" label="Quantity for Rs.40 Gola" value={quantity40} onchange={handleChange} disabled={isQuantity40Disabled}></lightning-input>                 
+                </div>             
+            </div>             
+            <div class="slds-grid slds-gutters">                 
+                <div class="slds-col slds-size_1-of-2 slds-m-top_large">                     
+                    <lightning-input name="box50" type="checkbox" label="Gola(Rs. 50)" checked={box50} onchange={handleChange}></lightning-input>                 
+                </div>                 
+                <div class="slds-col slds-size_1-of-2">                     
+                    <lightning-input name="quantity50" type="number" label="Quantity for Rs.50 Gola" value={quantity50} onchange={handleChange} disabled={isQuantity50Disabled}></lightning-input>                 
+                </div>             
+            </div>             
+            <div class="slds-grid slds-gutters">                 
+                <div class="slds-col slds-size_1-of-2 slds-m-top_large">                     
+                    <lightning-input name="box80" type="checkbox" label="Dish(Rs. 80)" checked={box80} onchange={handleChange}></lightning-input>                 
+                </div>                 
+                <div class="slds-col slds-size_1-of-2">                     
+                    <lightning-input name="quantity80" type="number" label="Quantity for Rs.80 Dish" value={quantity80} onchange={handleChange} disabled={isQuantity80Disabled}></lightning-input>                 
+                </div>             
+            </div>             
+            <div class="slds-grid slds-gutters">                 
+                <div class="slds-col slds-size_1-of-2 slds-m-top_large">                     
+                    <lightning-input name="box200" type="checkbox" label="Dish(Rs. 200)" checked={box200} onchange={handleChange}></lightning-input>                 
+                </div>                 
+                <div class="slds-col slds-size_1-of-2">                     
+                    <lightning-input name="quantity200" type="number" label="Quantity for Rs.200 Dish" value={quantity200} onchange={handleChange} disabled={isQuantity200Disabled}></lightning-input>                 
+                </div>             
+            </div>              
+            <lightning-button variant="brand" label="Save" onclick={handleSave} class="slds-m-left_x-small"></lightning-button>             
+            <lightning-button variant="destructive" label="Cancel" onclick={handleCancel} class="slds-m-left_x-small"></lightning-button>         
+        </div>     
+    </lightning-card> 
+</template>
